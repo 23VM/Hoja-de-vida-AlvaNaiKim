@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Esfera - Equipo Creativo</title>
+    <!-- Fuentes: Comfortaa y Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Fondo animado Durazno/Coral -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div id="particles-js"></div>
+
+    <main class="main-container">
+        
+        <!-- ================= PÁGINA 1: NUEVA CARÁTULA ASIMÉTRICA ================= -->
+        <section id="section-caratula" class="page-section active-page">
+            <div class="hero-wrapper">
+                
+                <!-- Columna Izquierda: Textos principales -->
+                <div class="hero-text-side">
+                    <div class="top-badge floating-item">✨ Diseño Web 2026 ✨</div>
+                    <h1 class="elegant-title">Hoja de Vida</h1>
+                    <h2 class="school-title">Unidad Educativa Carmen Mora de Encalada</h2>
+                    <p class="hero-subtitle">Explora los perfiles profesionales de nuestras diseñadoras a través de esta experiencia mágica interactiva.</p>
+                    
+                    <button id="btn-comenzar" class="action-btn heartbeat">
+                        Comenzar <i class="fas fa-sparkles"></i>
+                    </button>
+                </div>
+
+                <!-- Columna Derecha: Tarjetas Flotantes -->
+                <div class="hero-graphics-side">
+                    <div class="glass-circle-bg"></div> <!-- Círculo decorativo de fondo -->
+
+                    <!-- Tarjeta 1: Logo -->
+                    <div class="graphic-card card-logo float-anim-1">
+                        <img src="logo_carmen_mora.jpg" alt="Logo Institucional" class="hero-logo">
+                    </div>
+
+                    <!-- Tarjeta 2: Integrantes -->
+                    <div class="graphic-card card-team float-anim-2">
+                        <i class="fas fa-star icon-accent"></i>
+                        <div>
+                            <h4>Equipo Creativo</h4>
+                            <p>Anahí Alvarado • Naima Leon •     Kimberly Espinoza</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Datos Académicos -->
+                    <div class="graphic-card card-info float-anim-3">
+                        <div class="info-row"><i class="fas fa-laptop-code"></i> 2do Informática "B"</div>
+                        <div class="info-row"><i class="fas fa-user-tie"></i> Lic. Patricio Medina</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PÁGINA 2: LA ESFERA EXPANDIBLE ================= -->
+        <section id="section-detalles" class="page-section hidden-page">
+            
+            <div class="header-details">
+                <button id="btn-volver" class="magic-back-btn floating-item"><i class="fas fa-reply"></i> Volver</button>
+                <h2 class="title-cute">Nuestro Equipo</h2>
+            </div>
+
+            <!-- SELECTORES DE INTEGRANTES -->
+            <div class="member-selectors">
+                <button class="selector-btn active-sel" data-index="0">Anahí</button>
+                <button class="selector-btn" data-index="1">Naima</button>
+                <button class="selector-btn" data-index="2">Kimberly</button>
+            </div>
+
+            <!-- CONTENEDOR DE LA ESFERA MÁGICA -->
+            <div class="stage-container">
+                
+                <div id="magic-ball" class="magic-ball">
+                    <!-- Esfera Cerrada -->
+                    <div class="ball-closed-content">
+                        <i class="fas fa-fingerprint icon-finger"></i>
+                        <span id="ball-name">Anahí Alvarado</span>
+                        <span class="click-me">¡Aplasta para abrir!</span>
+                    </div>
+
+                    <!-- Tarjeta Abierta -->
+                    <div class="ball-opened-content hidden-content">
+                        <button id="close-ball" class="close-ball-btn"><i class="fas fa-times"></i></button>
+                        
+                        <h3 id="card-name" class="member-name">Anahí Alvarado</h3>
+                        <p class="member-role">Desarrolladora Web</p>
+                        
+                        <div class="images-container">
+                            <div class="img-wrapper">
+                                <img id="card-photo" src="foto_anahi_alvarado.jpg" class="zoom-trigger profile-img" data-caption="Anahí Alvarado">
+                                <span class="badge-hint">Ver Foto</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img id="card-qr" src="qr_anahi_alvarado.png" class="zoom-trigger qr-img" data-caption="QR Hoja de Vida - Anahí">
+                                <span class="badge-hint">Ver QR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-section">
+                <h3 class="thanks-title">Gracias por visitarnos 🌸</h3>
+                <p class="watermark">© 2026 Proyecto Interactivo | Diseño Durazno & Coral</p>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- MODAL DE ZOOM -->
+    <div id="image-modal" class="modal hidden">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imagen-ampliada">
+        <div id="caption">Visualización</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
