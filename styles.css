@@ -15,8 +15,8 @@ body {
 
 /* ================= ORBES LUMINOSOS ================= */
 .glow-orb { position: fixed; border-radius: 50%; filter: blur(60px); z-index: -2; animation: floatOrb 10s infinite ease-in-out alternate; }
-.orb-1 { width: 400px; height: 400px; background: rgba(255, 127, 80, 0.4); top: -10%; left: -10%; }
-.orb-2 { width: 500px; height: 500px; background: rgba(255, 218, 185, 0.6); bottom: -15%; right: -10%; animation-delay: 3s; }
+.orb-1 { width: 40vw; height: 40vw; max-width: 400px; max-height: 400px; background: rgba(255, 127, 80, 0.4); top: -10%; left: -10%; }
+.orb-2 { width: 50vw; height: 50vw; max-width: 500px; max-height: 500px; background: rgba(255, 218, 185, 0.6); bottom: -15%; right: -10%; animation-delay: 3s; }
 
 @keyframes floatOrb {
     0% { transform: translate(0, 0) scale(1); }
@@ -38,15 +38,15 @@ body {
 .active-page { opacity: 1; transform: scale(1); pointer-events: auto; position: relative; }
 .hidden-page { opacity: 0; transform: scale(1.2); pointer-events: none; position: absolute; filter: blur(10px); }
 
-/* ================= NUEVA CARÁTULA ================= */
+/* ================= CARÁTULA ================= */
 .hero-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 1000px; /* Un poco más amplio para que respire */
-    gap: 40px;
-    padding: 20px;
+    max-width: 1050px;
+    gap: clamp(20px, 4vw, 50px); /* Espaciado dinámico */
+    padding: 10px;
 }
 
 .hero-text-side {
@@ -59,41 +59,48 @@ body {
 
 .top-badge {
     background: white; color: #e74c3c;
-    padding: 8px 25px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
+    padding: 8px 25px; border-radius: 20px; font-size: clamp(0.7rem, 2vw, 0.85rem); font-weight: 700;
     text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
     box-shadow: 0 5px 15px rgba(252,182,159,0.5);
     border: 1px solid #ff7f50;
 }
 
-.elegant-title { font-family: 'Great Vibes', cursive; font-size: 5.5rem; color: #e74c3c; line-height: 1; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(231,76,60,0.2); }
-.school-title { font-size: 1.5rem; color: #d35400; font-weight: 700; margin-bottom: 15px; }
-.hero-subtitle { font-size: 1rem; color: #8e5431; line-height: 1.6; margin-bottom: 35px; max-width: 400px; }
+/* Título con tamaño dinámico (Se adapta al celular y PC) */
+.elegant-title { 
+    font-family: 'Great Vibes', cursive; 
+    font-size: clamp(3.5rem, 8vw, 6rem); 
+    color: #e74c3c; line-height: 1; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(231,76,60,0.2); 
+}
+.school-title { font-size: clamp(1.2rem, 3vw, 1.5rem); color: #d35400; font-weight: 700; margin-bottom: 15px; }
+.hero-subtitle { font-size: clamp(0.9rem, 2vw, 1rem); color: #8e5431; line-height: 1.6; margin-bottom: 35px; max-width: 400px; }
 
 .action-btn {
     background: linear-gradient(45deg, #ff7f50, #e74c3c); color: white; border: none;
-    padding: 18px 45px; border-radius: 40px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    padding: clamp(12px, 3vw, 18px) clamp(30px, 5vw, 45px); border-radius: 40px; 
+    font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 700; cursor: pointer;
     box-shadow: 0 10px 30px rgba(231,76,60,0.4); display: flex; align-items: center; gap: 10px; transition: 0.3s;
 }
 .action-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(231,76,60,0.6); }
 
-/* ================= GRÁFICOS DE LA DERECHA (Centrados y ordenados) ================= */
+/* ================= GRÁFICOS DE LA DERECHA (Apilados y Centrados) ================= */
 .hero-graphics-side {
     flex: 1;
     position: relative;
     display: flex;
-    flex-direction: column; /* Apila los elementos verticalmente */
+    flex-direction: column; 
     justify-content: center;
-    align-items: center;     /* Los centra en medio */
-    gap: 20px;               /* Espacio uniforme entre logo, tarjeta 1 y tarjeta 2 */
-    min-height: 450px;
+    align-items: center;     
+    gap: clamp(15px, 3vw, 25px); /* Espacio uniforme que se achica en celulares */
     width: 100%;
+    min-height: 450px;
 }
 
 .glass-circle-bg {
     position: absolute; 
-    width: 380px; height: 380px; /* Un poco más grande para envolver todo */
+    width: clamp(260px, 40vw, 380px); /* Se achica automáticamente en móvil */
+    height: clamp(260px, 40vw, 380px);
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%); /* Lo mantiene siempre en el centro exacto */
+    transform: translate(-50%, -50%); 
     background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px);
     border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 20px 40px rgba(252, 182, 159, 0.3);
@@ -101,20 +108,23 @@ body {
 }
 
 .graphic-card {
-    position: relative; /* Ya no son absolute, respetan el orden */
-    z-index: 2; /* Para que queden encima del círculo */
+    position: relative; 
+    z-index: 2; 
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(15px);
     border: 2px solid white;
     border-radius: 20px;
     box-shadow: 0 15px 30px rgba(211, 84, 0, 0.15);
-    padding: 15px 20px;
-    max-width: 100%;
+    padding: clamp(15px, 3vw, 20px) clamp(15px, 4vw, 25px);
+    width: 100%;
+    max-width: 360px; /* Evita que sean demasiado anchas en PC */
 }
 
 /* Tarjeta 1: Logo */
 .card-logo {
-    width: 130px; height: 130px; border-radius: 50%; padding: 5px;
+    width: clamp(100px, 20vw, 140px); 
+    height: clamp(100px, 20vw, 140px); 
+    border-radius: 50%; padding: 5px;
     display: flex; justify-content: center; align-items: center;
     background: linear-gradient(45deg, #ff7f50, #ffb6c1, #ffdab9);
     margin: 0 auto;
@@ -123,44 +133,42 @@ body {
 
 /* Tarjeta 2: Equipo */
 .card-team {
-    display: flex; align-items: center; gap: 15px;
-    padding: 20px 25px; border-left: 5px solid #ff7f50;
-    width: max-content;
+    display: flex; align-items: center; justify-content: center; gap: 15px;
+    border-left: 5px solid #ff7f50;
 }
-.icon-accent { font-size: 2rem; color: #ff7f50; }
-.card-team h4 { color: #e74c3c; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 5px; }
-.card-team p { font-weight: 700; color: #d35400; font-size: 1rem; }
+.icon-accent { font-size: clamp(1.5rem, 3vw, 2rem); color: #ff7f50; }
+.card-team h4 { color: #e74c3c; font-size: clamp(0.75rem, 2vw, 0.9rem); text-transform: uppercase; margin-bottom: 5px; }
+.card-team p { font-weight: 700; color: #d35400; font-size: clamp(0.85rem, 2vw, 1rem); }
 
 /* Tarjeta 3: Info */
 .card-info {
-    display: flex; flex-direction: column; gap: 10px;
-    width: max-content;
+    display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
 }
-.info-row { font-size: 0.9rem; font-weight: 700; color: #c0392b; display: flex; align-items: center; gap: 10px; }
-.info-row i { color: #ff7f50; }
+.info-row { font-size: clamp(0.8rem, 2vw, 0.9rem); font-weight: 700; color: #c0392b; display: flex; align-items: center; gap: 10px; }
+.info-row i { color: #ff7f50; font-size: 1.1rem; }
 
-/* Animaciones Flotantes Individuales */
+/* Animaciones Flotantes */
 .floating-item { animation: floatUpDown 3s infinite ease-in-out; }
 .heartbeat { animation: heartBeat 2s infinite; }
 .float-anim-1 { animation: floatUpDown 4s infinite ease-in-out; }
 .float-anim-2 { animation: floatUpDown 5s infinite ease-in-out reverse; }
 .float-anim-3 { animation: floatUpDown 3.5s infinite ease-in-out 1s; }
 
-@keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
 /* ================= PÁGINA 2: ESFERA MÁGICA ================= */
 .header-details { text-align: center; margin-bottom: 20px; width: 100%; max-width: 800px; position: relative; }
-.title-cute { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: #e74c3c; text-shadow: 2px 2px 8px rgba(231,76,60,0.2); }
-.magic-back-btn { position: absolute; left: 0; top: 15px; background: white; color: #ff7f50; border: 2px solid #ff7f50; padding: 10px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(252,182,159,0.4); transition: 0.3s; z-index: 5; }
+.title-cute { font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 8vw, 4rem); color: #e74c3c; text-shadow: 2px 2px 8px rgba(231,76,60,0.2); }
+.magic-back-btn { position: absolute; left: 0; top: 10px; background: white; color: #ff7f50; border: 2px solid #ff7f50; padding: 8px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(252,182,159,0.4); transition: 0.3s; z-index: 5; font-size: clamp(0.8rem, 2vw, 1rem); }
 .magic-back-btn:hover { background: #ff7f50; color: white; }
 
-.member-selectors { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-.selector-btn { background: rgba(255, 255, 255, 0.6); color: #d35400; border: 2px solid transparent; padding: 12px 30px; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(252,182,159,0.2); }
+.member-selectors { display: flex; justify-content: center; gap: clamp(8px, 2vw, 15px); margin-bottom: 30px; flex-wrap: wrap; }
+.selector-btn { background: rgba(255, 255, 255, 0.6); color: #d35400; border: 2px solid transparent; padding: 10px 25px; border-radius: 30px; font-weight: 700; font-size: clamp(0.85rem, 2vw, 1rem); cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(252,182,159,0.2); }
 .selector-btn:hover { background: white; border-color: #ff7f50; transform: translateY(-3px); }
 .active-sel { background: #ff7f50; color: white; box-shadow: 0 10px 20px rgba(255,127,80,0.4); border-color: #ff7f50; }
 
-.stage-container { width: 100%; height: 500px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
+.stage-container { width: 100%; height: clamp(400px, 60vh, 500px); display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
 
 /* ESFERA / TARJETA */
 .magic-ball {
@@ -171,7 +179,7 @@ body {
     cursor: pointer; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .magic-ball:not(.expanded):hover { transform: scale(1.05); box-shadow: 0 15px 50px rgba(255, 127, 80, 0.5); }
-.magic-ball.expanded { width: 350px; height: 480px; border-radius: 35px; cursor: default; border-width: 4px; }
+.magic-ball.expanded { width: clamp(280px, 90vw, 350px); height: clamp(420px, 70vh, 480px); border-radius: 35px; cursor: default; border-width: 4px; }
 
 .ball-closed-content { display: flex; flex-direction: column; align-items: center; transition: 0.3s; width: 100%; text-align: center; }
 .icon-finger { font-size: 2.5rem; color: #ff7f50; margin-bottom: 10px; animation: heartBeat 1.5s infinite; }
@@ -186,7 +194,7 @@ body {
 .close-ball-btn { position: absolute; top: 15px; right: 20px; background: #ffecd2; color: #e74c3c; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 3px 10px rgba(231,76,60,0.2); }
 .close-ball-btn:hover { background: #e74c3c; color: white; transform: rotate(90deg); }
 
-.member-name { font-size: 1.8rem; color: #d35400; margin-bottom: 5px; font-weight: 700; text-align: center; margin-top: 10px; }
+.member-name { font-size: clamp(1.4rem, 4vw, 1.8rem); color: #d35400; margin-bottom: 5px; font-weight: 700; text-align: center; margin-top: 10px; }
 .member-role { font-size: 0.85rem; color: #fff; font-weight: 700; background: #ff7f50; padding: 6px 18px; border-radius: 20px; margin-bottom: 25px; text-align: center; }
 
 .images-container { display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center; }
@@ -194,14 +202,14 @@ body {
 .badge-hint { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; font-size: 0.65rem; padding: 5px 12px; border-radius: 12px; opacity: 0; transition: 0.3s; white-space: nowrap; font-weight: bold; z-index: 5;}
 .img-wrapper:hover .badge-hint { opacity: 1; bottom: 5px; }
 
-.profile-img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid #ffecd2; box-shadow: 0 10px 20px rgba(255,127,80,0.3); cursor: zoom-in; transition: 0.4s; }
+.profile-img { width: clamp(90px, 20vw, 110px); height: clamp(90px, 20vw, 110px); border-radius: 50%; object-fit: cover; border: 4px solid #ffecd2; box-shadow: 0 10px 20px rgba(255,127,80,0.3); cursor: zoom-in; transition: 0.4s; }
 .profile-img:hover { transform: scale(1.1); border-color: #ff7f50; }
-.qr-img { width: 120px; height: 120px; border-radius: 20px; border: 3px solid #ffecd2; box-shadow: 0 10px 20px rgba(255,127,80,0.3); cursor: zoom-in; transition: 0.4s; background: white; padding: 5px; }
+.qr-img { width: clamp(100px, 22vw, 120px); height: clamp(100px, 22vw, 120px); border-radius: 20px; border: 3px solid #ffecd2; box-shadow: 0 10px 20px rgba(255,127,80,0.3); cursor: zoom-in; transition: 0.4s; background: white; padding: 5px; }
 .qr-img:hover { transform: scale(1.1); border-color: #ff7f50; }
 
-.footer-section { text-align: center; }
-.thanks-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #e74c3c; margin-bottom: 5px; }
-.watermark { font-size: 0.75rem; color: #d35400; font-weight: 700; letter-spacing: 1px; }
+.footer-section { text-align: center; padding: 10px; }
+.thanks-title { font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 5vw, 2.5rem); color: #e74c3c; margin-bottom: 5px; }
+.watermark { font-size: clamp(0.65rem, 2vw, 0.75rem); color: #d35400; font-weight: 700; letter-spacing: 1px; }
 
 /* MODAL DE ZOOM */
 .modal { position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255, 236, 210, 0.95); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s; padding: 20px; }
@@ -212,26 +220,29 @@ body {
 .close-modal:hover { transform: scale(1.2); }
 #caption { margin-top: 20px; font-weight: 700; color: #d35400; font-size: 1.3rem; background: white; padding: 5px 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(255,127,80,0.2); }
 
-/* ================= RESPONSIVE ================= */
+/* ================= MEDIA QUERIES (AJUSTES PARA MÓVILES) ================= */
 @media screen and (max-width: 850px) {
+    /* La carátula pasa a estar una cosa debajo de la otra en móviles */
     .hero-wrapper { flex-direction: column; text-align: center; gap: 30px; }
+    
+    /* El texto se centra perfecto en móviles */
     .hero-text-side { align-items: center; text-align: center; width: 100%; }
-    .elegant-title { font-size: 4.5rem; }
     
-    .hero-graphics-side { 
-        height: auto; min-height: 400px; width: 100%; 
-        padding-top: 20px;
-    }
+    /* Las tarjetas se ajustan */
+    .hero-graphics-side { height: auto; min-height: 350px; width: 100%; padding-top: 10px; }
     
-    .glass-circle-bg { width: 300px; height: 300px; }
+    /* Si es necesario, la tarjeta de equipo apila la info hacia el centro */
+    .card-team { flex-direction: column; text-align: center; border-left: none; border-top: 5px solid #ff7f50; }
     
-    .card-logo { width: 110px; height: 110px; }
-    .card-team { padding: 15px 20px; flex-direction: column; text-align: center; }
-    .card-team h4 { font-size: 0.8rem; }
-    .card-team p { font-size: 0.85rem; }
-    .card-info { padding: 12px; }
-    
+    /* El botón volver en móvil necesita espacio */
     .magic-back-btn { position: relative; margin-bottom: 20px; }
-    .stage-container { height: 460px; }
-    .magic-ball.expanded { width: 310px; height: 450px; }
+}
+
+@media screen and (max-width: 480px) {
+    /* Ajustes finales para pantallas MUY pequeñas */
+    .graphic-card { padding: 12px 15px; }
+    .card-info { align-items: center; text-align: center; }
+    .info-row { font-size: 0.75rem; }
+    .action-btn { width: 100%; justify-content: center; }
+    .selector-btn { width: 100%; margin-bottom: 5px; }
 }
