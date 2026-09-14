@@ -38,13 +38,13 @@ body {
 .active-page { opacity: 1; transform: scale(1); pointer-events: auto; position: relative; }
 .hidden-page { opacity: 0; transform: scale(1.2); pointer-events: none; position: absolute; filter: blur(10px); }
 
-/* ================= NUEVA CARÁTULA (Diseño Asimétrico) ================= */
+/* ================= NUEVA CARÁTULA ================= */
 .hero-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 950px;
+    max-width: 1000px; /* Un poco más amplio para que respire */
     gap: 40px;
     padding: 20px;
 }
@@ -76,47 +76,56 @@ body {
 }
 .action-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(231,76,60,0.6); }
 
-/* Gráficos de la derecha (Tarjetas flotantes) */
+/* ================= GRÁFICOS DE LA DERECHA (Centrados y ordenados) ================= */
 .hero-graphics-side {
     flex: 1;
     position: relative;
-    height: 450px;
     display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
     justify-content: center;
-    align-items: center;
+    align-items: center;     /* Los centra en medio */
+    gap: 20px;               /* Espacio uniforme entre logo, tarjeta 1 y tarjeta 2 */
+    min-height: 450px;
+    width: 100%;
 }
 
 .glass-circle-bg {
-    position: absolute; width: 320px; height: 320px;
+    position: absolute; 
+    width: 380px; height: 380px; /* Un poco más grande para envolver todo */
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); /* Lo mantiene siempre en el centro exacto */
     background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px);
     border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 20px 40px rgba(252, 182, 159, 0.3);
+    z-index: 1;
 }
 
 .graphic-card {
-    position: absolute;
+    position: relative; /* Ya no son absolute, respetan el orden */
+    z-index: 2; /* Para que queden encima del círculo */
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(15px);
     border: 2px solid white;
     border-radius: 20px;
     box-shadow: 0 15px 30px rgba(211, 84, 0, 0.15);
     padding: 15px 20px;
+    max-width: 100%;
 }
 
 /* Tarjeta 1: Logo */
 .card-logo {
-    top: 20px; left: 20px;
     width: 130px; height: 130px; border-radius: 50%; padding: 5px;
     display: flex; justify-content: center; align-items: center;
     background: linear-gradient(45deg, #ff7f50, #ffb6c1, #ffdab9);
+    margin: 0 auto;
 }
 .hero-logo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white; }
 
 /* Tarjeta 2: Equipo */
 .card-team {
-    top: 150px; right: 0;
     display: flex; align-items: center; gap: 15px;
     padding: 20px 25px; border-left: 5px solid #ff7f50;
+    width: max-content;
 }
 .icon-accent { font-size: 2rem; color: #ff7f50; }
 .card-team h4 { color: #e74c3c; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 5px; }
@@ -124,8 +133,8 @@ body {
 
 /* Tarjeta 3: Info */
 .card-info {
-    bottom: 30px; left: 40px;
     display: flex; flex-direction: column; gap: 10px;
+    width: max-content;
 }
 .info-row { font-size: 0.9rem; font-weight: 700; color: #c0392b; display: flex; align-items: center; gap: 10px; }
 .info-row i { color: #ff7f50; }
@@ -140,10 +149,10 @@ body {
 @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-/* ================= PÁGINA 2: ESFERA MÁGICA (Sin cambios mayores, solo colores) ================= */
+/* ================= PÁGINA 2: ESFERA MÁGICA ================= */
 .header-details { text-align: center; margin-bottom: 20px; width: 100%; max-width: 800px; position: relative; }
 .title-cute { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: #e74c3c; text-shadow: 2px 2px 8px rgba(231,76,60,0.2); }
-.magic-back-btn { position: absolute; left: 0; top: 15px; background: white; color: #ff7f50; border: 2px solid #ff7f50; padding: 10px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(252,182,159,0.4); transition: 0.3s; }
+.magic-back-btn { position: absolute; left: 0; top: 15px; background: white; color: #ff7f50; border: 2px solid #ff7f50; padding: 10px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(252,182,159,0.4); transition: 0.3s; z-index: 5; }
 .magic-back-btn:hover { background: #ff7f50; color: white; }
 
 .member-selectors { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -182,7 +191,7 @@ body {
 
 .images-container { display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center; }
 .img-wrapper { position: relative; }
-.badge-hint { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; font-size: 0.65rem; padding: 5px 12px; border-radius: 12px; opacity: 0; transition: 0.3s; white-space: nowrap; font-weight: bold; }
+.badge-hint { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; font-size: 0.65rem; padding: 5px 12px; border-radius: 12px; opacity: 0; transition: 0.3s; white-space: nowrap; font-weight: bold; z-index: 5;}
 .img-wrapper:hover .badge-hint { opacity: 1; bottom: 5px; }
 
 .profile-img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid #ffecd2; box-shadow: 0 10px 20px rgba(255,127,80,0.3); cursor: zoom-in; transition: 0.4s; }
@@ -199,25 +208,30 @@ body {
 .modal.show { opacity: 1; visibility: visible; }
 .modal-content { max-width: 90%; max-height: 80vh; border-radius: 30px; border: 5px solid white; box-shadow: 0 30px 60px rgba(255,127,80,0.3); transform: scale(0.7) rotate(5deg); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); object-fit: contain; }
 .modal.show .modal-content { transform: scale(1) rotate(0deg); }
-.close-modal { position: absolute; top: 20px; right: 30px; color: #e74c3c; font-size: 50px; cursor: pointer; transition: 0.3s; }
+.close-modal { position: absolute; top: 20px; right: 30px; color: #e74c3c; font-size: 50px; cursor: pointer; transition: 0.3s; z-index: 10; }
 .close-modal:hover { transform: scale(1.2); }
 #caption { margin-top: 20px; font-weight: 700; color: #d35400; font-size: 1.3rem; background: white; padding: 5px 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(255,127,80,0.2); }
 
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width: 850px) {
-    .hero-wrapper { flex-direction: column; text-align: center; }
-    .hero-text-side { align-items: center; text-align: center; }
+    .hero-wrapper { flex-direction: column; text-align: center; gap: 30px; }
+    .hero-text-side { align-items: center; text-align: center; width: 100%; }
     .elegant-title { font-size: 4.5rem; }
-    .hero-graphics-side { height: 350px; width: 100%; margin-top: 20px; }
     
-    .glass-circle-bg { width: 250px; height: 250px; }
-    .card-logo { width: 100px; height: 100px; top: 0; left: 10%; }
-    .card-team { top: 120px; right: 5%; padding: 15px; }
+    .hero-graphics-side { 
+        height: auto; min-height: 400px; width: 100%; 
+        padding-top: 20px;
+    }
+    
+    .glass-circle-bg { width: 300px; height: 300px; }
+    
+    .card-logo { width: 110px; height: 110px; }
+    .card-team { padding: 15px 20px; flex-direction: column; text-align: center; }
     .card-team h4 { font-size: 0.8rem; }
-    .card-team p { font-size: 0.9rem; }
-    .card-info { bottom: 0; left: 10%; padding: 12px; }
+    .card-team p { font-size: 0.85rem; }
+    .card-info { padding: 12px; }
     
-    .magic-back-btn { position: relative; margin-bottom: 15px; }
+    .magic-back-btn { position: relative; margin-bottom: 20px; }
     .stage-container { height: 460px; }
     .magic-ball.expanded { width: 310px; height: 450px; }
 }
